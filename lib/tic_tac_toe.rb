@@ -25,29 +25,7 @@ class TicTacToe
   end
     
   def input_to_index(user_input)
-    user_input = user_input.to_i
-    case user_input
-    when 1
-      0
-    when 2
-      1
-    when 3
-      2
-    when 4
-      3
-    when 5
-      4
-    when 6
-      5
-    when 7
-      6
-    when 8
-      7
-    when 9
-      8
-    else 
-      puts "That number is invalid."
-    end 
+    return user_input.to_i - 1
   end
   
   def move(index, player_token = "X")
@@ -63,11 +41,7 @@ class TicTacToe
   end 
     
   def valid_move?(index)
-    if index > 8 || index < 0 || position_taken?(index) == true || index == nil
-      false 
-    else 
-      true
-    end 
+    index.between?(0, 9) && !position_taken?(index)
   end 
     
   def turn_count
@@ -83,22 +57,18 @@ class TicTacToe
   end 
   
   def current_player
-    if turn_count % 2 == 0
-      "X"
-    else 
-      "O"
-    end 
+    turn_count % 2 == 0 ? "X" : "O"
   end 
   
   def turn
-    turn_input = gets
+    puts "Please enter 1-9:"
+    turn_input = gets.strip
     proper_turn = input_to_index(turn_input)
-    if proper_turn == nil || valid_move?(proper_turn) == false
-      puts "invalid move, try again"
-      turn
-    else 
-      @board[proper_turn] = current_player
+    if valid_move?(proper_turn)
+      move(proper_turn, current_player)
       display_board
+    else 
+      turn 
     end 
   end
 
@@ -119,19 +89,11 @@ class TicTacToe
   end 
   
   def draw? 
-    if full? == true && won? == false
-      true
-    else 
-      false 
-    end 
+    full? && !won?
   end 
   
   def over?
-    if won? == true || full? == true
-      true 
-    else 
-      false
-    end 
+    won? || draw?
   end 
   
   def winner
@@ -142,14 +104,15 @@ class TicTacToe
   end
   
   
-  def play 
-    when over != true 
+  def play
+    until over?
+      #binding.pry
       turn 
-      if won?
-        puts "Congratulations #{winner}!"
-      else 
-        puts "Cat's Game!" 
-      end 
+    end 
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!" 
     end 
   end 
 
