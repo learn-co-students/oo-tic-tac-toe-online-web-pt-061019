@@ -1,3 +1,4 @@
+require "pry"
 class TicTacToe
   
   def initialize(board = nil)
@@ -62,7 +63,7 @@ class TicTacToe
   end 
     
   def valid_move?(index)
-    if index > 8 || position_taken?(index) == true
+    if index > 8 || index < 0 || position_taken?(index) == true || index == nil
       false 
     else 
       true
@@ -90,16 +91,77 @@ class TicTacToe
   end 
   
   def turn
-    turn = gets 
-    proper_turn = input_to_index(turn)
-    if valid_move(proper_turn) == false
-      "invalid"
+    turn_input = gets
+    proper_turn = input_to_index(turn_input)
+    if proper_turn == nil || valid_move?(proper_turn) == false
+      puts "invalid move, try again"
+      turn
     else 
       @board[proper_turn] = current_player
+      display_board
+    end 
+  end 
+  
+  def is_o?(piece)
+    if piece == "O"
+      true
+    else 
+      false
+    end 
+  end 
+  
+  def is_x?(piece)
+    if piece == "X"
+      true
+    else 
+      false
     end 
   end 
   
   
+  
+  def won?
+    winning = 0
+    won = false
+    WIN_COMBINATIONS.each do |win_combination|
+      binding.pry
+      
+      if @board[win_combination[0] == @board[win_combination[1]] && @board[win_combination[0]] == @board[win_combination[2]]
+        won = true 
+      else 
+        won = false 
+      end 
+    end 
+  end 
+      
+  #     #iterate through your winning combination and return won as true if you get 3 o's
+  #     win_combination.each do |place|
+  #       #if is_o?(@board[place]) == true
+  #       if @board[place] == "O"
+  #         winning += 1 
+  #         if winning == 3
+  #           return won = true
+  #         end 
+  #       else 
+  #         won = false 
+  #       end
+  #     end 
+      
+  #     #iterate through your winning combination and return won as true if you get 3 x's
+  #     win_combination.each do |place|
+  #       #if is_x?(@board[place]) == true 
+  #       if @board[place] == "X"
+  #         winning += 1 
+  #         if winning == 3
+  #           return won = true
+  #         end 
+  #       else 
+  #         won = false
+  #       end
+  #     end 
+  #   end 
+  #   won
+  # end 
   
   
   
