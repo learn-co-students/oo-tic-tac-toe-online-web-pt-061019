@@ -101,7 +101,7 @@ class TicTacToe
       display_board
     end 
   end
-  
+
   def won?
     WIN_COMBINATIONS.any? do |win_combination|
       if @board[win_combination[0]] == @board[win_combination[1]] && @board[win_combination[0]] == @board[win_combination[2]]
@@ -122,7 +122,7 @@ class TicTacToe
     if full? == true && won? == false
       true
     else 
-      false
+      false 
     end 
   end 
   
@@ -141,15 +141,16 @@ class TicTacToe
     end 
   end
   
+  
   def play 
-    while over? == false do 
+    when over != true 
       turn 
-      if won? 
+      if won?
         puts "Congratulations #{winner}!"
-      elseif draw? == true 
-        puts "Cat's Game!"
+      else 
+        puts "Cat's Game!" 
       end 
     end 
   end 
-  
+
 end 
