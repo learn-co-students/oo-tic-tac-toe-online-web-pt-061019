@@ -100,69 +100,56 @@ class TicTacToe
       @board[proper_turn] = current_player
       display_board
     end 
-  end 
-  
-  def is_o?(piece)
-    if piece == "O"
-      true
-    else 
-      false
-    end 
-  end 
-  
-  def is_x?(piece)
-    if piece == "X"
-      true
-    else 
-      false
-    end 
-  end 
-  
-  
+  end
   
   def won?
-    winning = 0
-    won = false
-    WIN_COMBINATIONS.each do |win_combination|
-      binding.pry
-      
-      if @board[win_combination[0] == @board[win_combination[1]] && @board[win_combination[0]] == @board[win_combination[2]]
-        won = true 
-      else 
-        won = false 
+    WIN_COMBINATIONS.any? do |win_combination|
+      if @board[win_combination[0]] == @board[win_combination[1]] && @board[win_combination[0]] == @board[win_combination[2]]
+        return win_combination
+      end 
+    end 
+  end
+  
+  def full?
+    if turn_count <= 8
+      false
+    else 
+      true
+    end 
+  end 
+  
+  def draw? 
+    if full? == true && won? == false
+      true
+    else 
+      false
+    end 
+  end 
+  
+  def over?
+    if won? == true || full? == true
+      true 
+    else 
+      false
+    end 
+  end 
+  
+  def winner
+    return nil unless won?
+    if @board[won?[0]] != " "
+      @board[won?[0]]
+    end 
+  end
+  
+  def play 
+    while over? == false do 
+      turn 
+      if won? 
+        puts "Congratulations #{winner}!"
+      elseif draw? == true 
+        puts "Cat's Game!"
       end 
     end 
   end 
-      
-  #     #iterate through your winning combination and return won as true if you get 3 o's
-  #     win_combination.each do |place|
-  #       #if is_o?(@board[place]) == true
-  #       if @board[place] == "O"
-  #         winning += 1 
-  #         if winning == 3
-  #           return won = true
-  #         end 
-  #       else 
-  #         won = false 
-  #       end
-  #     end 
-      
-  #     #iterate through your winning combination and return won as true if you get 3 x's
-  #     win_combination.each do |place|
-  #       #if is_x?(@board[place]) == true 
-  #       if @board[place] == "X"
-  #         winning += 1 
-  #         if winning == 3
-  #           return won = true
-  #         end 
-  #       else 
-  #         won = false
-  #       end
-  #     end 
-  #   end 
-  #   won
-  # end 
-  
-  
   
 end 
