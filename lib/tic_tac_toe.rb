@@ -33,11 +33,7 @@ class TicTacToe
   end 
   
   def position_taken?(index) 
-    if @board[index] != " "
-      true 
-    else 
-      false 
-    end 
+    @board[index] != " " ? true : false 
   end 
     
   def valid_move?(index)
@@ -74,18 +70,14 @@ class TicTacToe
 
   def won?
     WIN_COMBINATIONS.any? do |win_combination|
-      if @board[win_combination[0]] == @board[win_combination[1]] && @board[win_combination[0]] == @board[win_combination[2]]
+      if @board[win_combination[0]] != " " && @board[win_combination[0]] == @board[win_combination[1]] && @board[win_combination[0]] == @board[win_combination[2]]
         return win_combination
       end 
     end 
   end
   
   def full?
-    if turn_count <= 8
-      false
-    else 
-      true
-    end 
+    turn_count <= 8 ? false : true 
   end 
   
   def draw? 
@@ -93,7 +85,7 @@ class TicTacToe
   end 
   
   def over?
-    won? || draw?
+    draw? || won?
   end 
   
   def winner
@@ -103,17 +95,15 @@ class TicTacToe
     end 
   end
   
-  
   def play
     until over?
-      #binding.pry
       turn 
     end 
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
-      puts "Cat's Game!" 
-    end 
+      puts "Cat's Game!"
+    end
   end 
 
 end 
