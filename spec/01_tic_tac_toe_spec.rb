@@ -1,5 +1,5 @@
 require_relative '../lib/tic_tac_toe.rb'
-
+require 'pry'
 describe './lib/tic_tac_toe.rb' do
   describe TicTacToe do
     describe '#initialize' do
@@ -142,8 +142,8 @@ describe './lib/tic_tac_toe.rb' do
         game = TicTacToe.new
         board = ["O", " ", " ", " ", "X", " ", " ", " ", " "]
         game.instance_variable_set(:@board, board)
-
         expect(game.current_player).to eq("X")
+          # binding.pry
       end
 
       it 'returns the correct player, O, for the fourth move' do
