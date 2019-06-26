@@ -46,4 +46,35 @@ class TicTacToe
       false
     end
   end
+  
+  def turn_count
+    num_turns = 0
+    @board.each do |index|
+      if index == "X" || index == "O"
+        num_turns += 1
+      end
+    end
+    num_turns
+  end
+  
+  def current_player
+    if turn_count % 2 == 0
+      "X"
+    else
+      "O"
+    end
+  end
+  
+  def turn
+    puts "Please choose a position between 1-9"
+    user_input = gets.strip
+    index = input_to_index(user_input)
+    player = current_player
+    if valid_move?(index)
+      move(index, player)
+      display_board
+    else
+      turn
+    end
+  end
 end
