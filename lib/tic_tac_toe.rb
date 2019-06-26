@@ -46,17 +46,17 @@ class TicTacToe
   end
 
   def turn
-    until !position_taken?(input)
       puts "Please enter 1-9:"
       input = gets.strip
-      if !position_taken?(input)
+      if  !position_taken?(input) && input.to_i.to_s == input
         input_to_index(input)
         valid_move?(input)
-        current_player
-        move(input.to_i-1)
+        # current_player
+        move(input.to_i-1,current_player)
         display_board
+      else
+        turn
       end
-    end
   end
 
   def turn_count
@@ -65,28 +65,59 @@ class TicTacToe
 
   def current_player
     turn_count.odd? ? "O" : "X"
-    # binding.pry
+    # turn_count % 2 == 0 ? "X" : "O"
   end
 
 
+ #find the first winner by compare 1st,2nd,3rd cells are matched
   def won?
+    WIN_COMBINATIONS.detect do |winner|
+      @board[winner[0]] == @board[winner[1]] &&
+      @board[winner[1]] == @board[winner[2]] &&
+      (@board[winner[0]] == "X" || @board[winner[0]] == "O")
+# binding.pry
+      # [1,4,7]
+      # ["X","X","X"]
+    end
+  end
+
+  def draw?
+    full? && !won?
   end
 
   def full?
     @board.all?{|character| character =="X" || character =="O"}
   end
 
-  def draw?
-  end
-
   def over?
+    won? || draw?
   end
 
   def winner
+    if winning_combo = won?
+      @winter = @board[winning_combo.first]
+    end
   end
 
   def play
-  end
-
-
+    # until the game is over
+    #   take turns
+    # end
+    #
+    # if the game was won
+    #   congratulate the winner
+    # else if the game was a draw
+    #   tell the players it ended in a draw
+    # end
+    # puts "Welcome to Tic Tac Toe!"
+   until over?
+     turn
+   end
+     if won?
+       puts "Congratulations #{winner}!" if won?
+       # binding.pry
+     else
+       puts "Cat's Game!"
+     end
+   end
 end
