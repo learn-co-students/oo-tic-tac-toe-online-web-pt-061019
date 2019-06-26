@@ -31,10 +31,19 @@ class TicTacToe
     @board[index] = token
   end
   
-  def position_taken?
-    if user_input.to_i - 1.include?(token)
+  def position_taken?(index)
+    if @board[index] == "X" || @board[index] == "O"
       true
     else
       false
     end
+  end
+  
+  def valid_move?(index)
+    if !position_taken?(index) && index.between?(0, 8)
+      true
+    else
+      false
+    end
+  end
 end
