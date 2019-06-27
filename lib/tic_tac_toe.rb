@@ -86,8 +86,8 @@ class TicTacToe
       
       if turn == w_combo1 || turn == w_combo2 || turn == w_combo3 || turn == w_combo4 || turn == w_combo5 || turn == w_combo6 || turn == w_combo7 || turn == w_combo8
         w_combo
-      elsif !WIN_COMBINATIONS
-        turn
+      else 
+        false
       end
     end
   end
