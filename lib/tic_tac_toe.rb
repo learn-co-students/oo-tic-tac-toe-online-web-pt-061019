@@ -72,4 +72,23 @@ class TicTacToe
       end
     end
   end
-#end
+
+  def won?
+    WIN_COMBINATIONS.each do |w_combo|
+      WIN_COMBINATIONS[0] = w_combo1
+      WIN_COMBINATIONS[1] = w_combo2
+      WIN_COMBINATIONS[2] = w_combo3
+      WIN_COMBINATIONS[3] = w_combo4
+      WIN_COMBINATIONS[4] = w_combo5
+      WIN_COMBINATIONS[5] = w_combo6
+      WIN_COMBINATIONS[6] = w_combo7
+      WIN_COMBINATIONS[7] = w_combo8
+      
+      if turn == w_combo1 || turn == w_combo2 || turn == w_combo3 || turn == w_combo4 || turn == w_combo5 || turn == w_combo6 || turn == w_combo7 || turn == w_combo8
+        w_combo
+      else
+        turn
+      end
+    end
+  end
+end
