@@ -53,6 +53,8 @@ class TicTacToe
     @board[index].each do |index|
       if index == "X" || index == "O"
         num_turns += 1
+           num_turns
+
       end
     end
    num_turns
