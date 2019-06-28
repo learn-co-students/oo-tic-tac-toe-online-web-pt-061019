@@ -94,4 +94,24 @@ class TicTacToe
   def over?
     won? || full?
   end
+  
+  def winner
+    if won?
+      @board[won?[0]]
+    end
+  end
+  
+  def play
+    until over?
+    turn
+    end
+    if over?
+      if won?
+        puts "Congratulations #{winner}!"
+      end
+      if draw?
+        puts "The game has ended in a draw"
+      end
+    end
+  end
 end
