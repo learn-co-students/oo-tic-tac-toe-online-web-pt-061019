@@ -84,8 +84,14 @@ class TicTacToe
   end
   
   def full?
-    @board.detect do |x, o|
-      !@board.any? {|i| i == "" || i == " "}
-    end
+    !@board.any? {|i| i == "" || i == " "}
+  end
+    
+  def draw?
+    !won? && full?
+  end
+  
+  def over?
+    won? || full?
   end
 end
