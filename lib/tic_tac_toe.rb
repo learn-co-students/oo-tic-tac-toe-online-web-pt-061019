@@ -104,7 +104,6 @@ class TicTacToe
   def play
     until over?
     turn
-    draw.detect
   end
     if over?
       if won?
