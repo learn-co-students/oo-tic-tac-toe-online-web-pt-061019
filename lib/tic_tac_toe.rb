@@ -82,4 +82,10 @@ class TicTacToe
       w_combo1 == "O" && w_combo2 == "O" && w_combo3 == "O" 
     end
   end
+  
+  def full?
+    @board.detect do |x, o|
+      !@board.any? {|i| i == "" || i == " "}
+    end
+  end
 end
