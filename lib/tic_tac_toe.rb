@@ -33,6 +33,10 @@ def position_taken?(index)
 end
 end
 
+#  def position_taken?(index)
+#     @board[index] != " "
+#   end
+
 def valid_move?(index)
   if !position_taken?(index) && index.between?(0,8)
     true
@@ -40,6 +44,10 @@ def valid_move?(index)
     false
 end
 end
+
+# def valid_move?(index)
+#     !position_taken?(index) && index.between?(0,8)
+#   end
 
 def turn_count
   @board.count {|token| token == "X" || token == "O"}
@@ -77,6 +85,10 @@ def full?
   end
 end
 
+# def full?
+#     @board.all?{|square| square != " " }
+#   end
+  
 def draw?
  !won? && full?
 end
@@ -101,4 +113,10 @@ def play
     puts "Congratulations #{winner}!"
 end
 end
+
+# def play
+#     turn until over?
+#     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+#   end
+
 end
