@@ -75,7 +75,7 @@ class TicTacToe
   def draw?
     if (full? == true) && (won? == nil)
       true
-    else (full? == false) || (won? == true)
+      else (full? == false) || (won? == true)
       false
     end
   end
@@ -95,9 +95,9 @@ class TicTacToe
       turn
     end
     if won?
-        puts "Congratulations #{current_player}!"
+      puts "Congratulations #{winner}!"
     else draw?
-      puts "Cat's a Game!"
+      puts "Cat's Game!"
     end
   end
 end
