@@ -1,8 +1,8 @@
-
+require'pry'
 class TicTacToe
 
-def initialize
-      @board = Array.new(9, " ")
+def initialize(board = nil)
+      @board = board || Array.new(9, " ")
 end
 
 WIN_COMBINATIONS = [
@@ -58,36 +58,22 @@ def turn
     if valid_move?(index)
       token = current_player
       move(index, token)
+       display_board
     else
       turn
     end
-    display_board
-end
+   end
  
 def won?
-  if @board.all? { |place| place == ' ' }
-    return false
-  end
-  for combo in WIN_COMBINATIONS
-    if combo.all? { |index| @board[index] == 'X' }
-      return combo
-        elsif combo.all? { |index| @board[index] == 'O' }
-        return combo
-  end
-end
-  false
+    WIN_COMBINATIONS.detect {|win_combo| win_combo.all?{|pos| @board[pos]=="X"} || win_combo.all?{|pos| @board[pos]=="O"}}
 end
 
 def full?
-    @board.all? {|full| full == "X" || full == "O"} ? true : false
+    @board.all? {|full| full == "X" || full == "O"} 
 end
 
 def draw?
-    if full? == true && won?  == false
-      return true
-    else
-      return false
-  end
+   !won? && full?
 end
 
 def over?
@@ -97,20 +83,26 @@ def over?
       false
   end
 end
- 
-def winner
-      if won?
-        win_combination = won?
-          if @board[win_combination[0]] == "X"
-            return "X"
-          else
-            return "O"
+  def winner
+    WIN_COMBINATIONS.find do |win_combination|
+      if @board[win_combination[0]] == "X" && @board[win_combination[1]] == "X" && @board[win_combination[2]] == "X"
+          return "X"
+      elsif @board[win_combination[0]] == "O" && @board[win_combination[1]] == "O" && @board[win_combination[2]] == "O"
+          return "O"
+      else
+          nil
+      end
     end
   end
-end
 
-# def play
-#     turn until over?
-#     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
-#   end
+ def play
+    until over? do
+      turn
+    end
+    if won?
+       puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!" 
+     end
+  end
 end
