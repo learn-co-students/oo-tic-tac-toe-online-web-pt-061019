@@ -1,3 +1,20 @@
 #!/usr/bin/env ruby
 require 'pry'
 require_relative '../lib/tic_tac_toe.rb'
+
+puts "Welcome to Tic Tac Toe!"
+# def play_again?
+#   puts "Would you like to play a game? (y/n)"
+#   should_play = gets.to_s.strip.downcase
+#   if should_play == "y"
+#     game = TicTacToe.new
+#     game.play
+#     play_again? if game.over?
+#   else
+#     puts "Thanks for playing!"
+#   end
+# end
+# play_again?
+
+game = TicTacToe.new
+game.play
