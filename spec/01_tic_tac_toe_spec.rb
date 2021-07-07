@@ -290,7 +290,7 @@ describe './lib/tic_tac_toe.rb' do
         game = TicTacToe.new
         board = ["X", "O", "O", " ", "X", " ", " ", " ", "X"]
         game.instance_variable_set(:@board, board)
-
+      
         expect(game.winner).to eq("X")
       end
 
@@ -298,7 +298,7 @@ describe './lib/tic_tac_toe.rb' do
         game = TicTacToe.new
         board = ["X", "O", "X", " ", "O", " ", " ", "O", "X"]
         game.instance_variable_set(:@board, board)
-
+      
         expect(game.winner).to eq("O")
       end
 
